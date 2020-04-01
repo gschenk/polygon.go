@@ -7,17 +7,15 @@ import (
     "log"
     "os"
 
-    "github.com/gschenk/polyGo/extrema"
+//    "polyGo/extrema"
+    "polyGo/vector"
+    "polyGo/tools"
 )
 
-type Point struct{
-    X float64
-    Y float64
-}
 
         // [{"x": 1e-3, "y":-2.235}, {"x": 42, "y":-13}]
 func main() {
-    var record []Point
+    var record []vector.PointXY
     reader := bufio.NewReader(os.Stdin)
     for {
         text, err := reader.ReadString('\n')
@@ -30,8 +28,9 @@ func main() {
         if err != nil {
             log.Fatal(err)
         }
-        fmt.Printf
-        s := extrema.FindValues("x: %f, y: %f\n", record[0].X, record[0].Y)
+
+        vs := tools.PointsToVecs(record)
+        fmt.Println(vs)
 
     }
 }
