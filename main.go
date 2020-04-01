@@ -6,6 +6,8 @@ import (
     "fmt"
     "log"
     "os"
+
+    "github.com/gschenk/polyGo/extrema"
 )
 
 type Point struct{
@@ -28,7 +30,8 @@ func main() {
         if err != nil {
             log.Fatal(err)
         }
-        fmt.Printf("x: %f, y: %f\n", record[0].X, record[0].Y)
+        fmt.Printf
+        s := extrema.FindValues("x: %f, y: %f\n", record[0].X, record[0].Y)
 
     }
 }

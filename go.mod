@@ -1,3 +1,3 @@
-module polygon.go
+module polyGo
 
 go 1.14
