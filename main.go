@@ -7,11 +7,10 @@ import (
     "log"
     "os"
 
-//    "polyGo/extrema"
+    "polyGo/extrema"
     "polyGo/vector"
     "polyGo/tools"
 )
-
 
         // [{"x": 1e-3, "y":-2.235}, {"x": 42, "y":-13}]
 func main() {
@@ -29,8 +28,12 @@ func main() {
             log.Fatal(err)
         }
 
-        vs := tools.PointsToVecs(record)
-        fmt.Println(vs)
+        // 
+        points := tools.PointsToVecs(record)
+
+        ex := extrema.FindValues(points[0], points)
+        fmt.Println(ex)
 
     }
+
 }
