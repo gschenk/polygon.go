@@ -28,11 +28,12 @@ func main() {
             log.Fatal(err)
         }
 
-        // 
+        // assign data from json to a slice of vectors
         points := tools.PointsToVecs(record)
 
-        ex := extrema.FindValues(points[0], points)
-        fmt.Println(ex)
+        // find extreme values from :
+        extPoints := tools.RemoveDuplicates(extrema.FindValues(points[0], points))
+        fmt.Println(extPoints)
 
     }
 

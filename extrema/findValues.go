@@ -57,10 +57,15 @@ func innerFindValues(point v.Vec, accu Accu) Accu {
     return result
 }
 
-func FindValues (iniPoint v.Vec, points []v.Vec) Accu {
+func FindValues (iniPoint v.Vec, points []v.Vec) []v.Vec{
     accu := makeInitAccu(iniPoint)
     for _, p := range points {
         accu = innerFindValues(p, accu)
     }
-    return accu
+    extremes := make([]v.Vec, len(accu))
+    for i, a := range accu {
+        extremes[i] = a
+    }
+    return extremes
 }
+
