@@ -1,3 +1,7 @@
+// Package extrema provides the function FindValues to find points in a point
+// cloud in the Cartesian plane. The coordinates of these points have extreme
+// values along the cardinal or diagonal axes.
+//
 package extrema
 
 import (
@@ -13,7 +17,12 @@ type Accu [8]v.Vec
 // compare function type
 type compare func(v.Vec, v.Vec) bool
 
-// there is no ternary!
+// A number of functions that return Bool are defined here.
+// These functions compare two points given by their position vector.
+// The naming follows the convention of a plot posted to a wall, where
+// the x-axis increases to the right and the y-axis to the top.
+//
+// There is no ternary in Go!
 var fLeft = func(a, b v.Vec) bool { return a[0] < b[0] }
 var fBotLeft = func(a, b v.Vec) bool { return a[0]+a[1] < b[0]+b[1] }
 var fBot = func(a, b v.Vec) bool { return a[1] < b[1] }
@@ -57,6 +66,12 @@ func innerFindValues(point v.Vec, accu Accu) Accu {
 	return result
 }
 
+// FindValues takes an initial point that is certainly within
+// the point cloud and a slice of points. All points are position
+// vectors of type Vec.
+// The function returns up to eight unique position vectors for
+// points with extreme coordinate values along cardinal and diagonal
+// axes. The resulting slice may contain duplicates.
 func FindValues(iniPoint v.Vec, points []v.Vec) []v.Vec {
 	accu := makeInitAccu(iniPoint)
 	for _, p := range points {

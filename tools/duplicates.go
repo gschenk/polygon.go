@@ -1,3 +1,4 @@
+// Package tools provides useful functions for PolyGo
 package tools
 
 import (
