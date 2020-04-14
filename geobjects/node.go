@@ -5,10 +5,11 @@ import "polyGo/vector"
 
 // Node is a struct that provides the position vector of a node of a polygon
 type Node struct {
-	vector.Vec
+	id int64
+	v  vector.Vec
 }
 
-// MakeNode creates a node struct from a position vector
-func MakeNode(a vector.Vec) Node {
-	return Node{a}
+// NewNode creates a node struct from a position vector
+func NewNode(a vector.Vec) Node {
+	return Node{id(), a}
 }

@@ -5,12 +5,13 @@ import "polyGo/vector"
 
 // Edge provides the position vector of one point and the edge vector
 type Edge struct {
+	id     int64
 	node   Node
 	vector vector.Vec
 }
 
-// MakeEdge returns an Edge struct when provided with position vector of two
+// NewEdge returns an Edge struct when provided with position vector of two
 // points A and B. The Edge vector is oriented from a to b.
-func MakeEdge(a, b vector.Vec) Edge {
-	return Edge{MakeNode(a), vector.FromAtoB(a, b)}
+func NewEdge(a, b vector.Vec) Edge {
+	return Edge{id(), NewNode(a), vector.FromAtoB(a, b)}
 }

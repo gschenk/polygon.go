@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"polyGo/extrema"
+	g "polyGo/geobjects"
 	"polyGo/tools"
 	"polyGo/vector"
 )
@@ -45,11 +46,17 @@ func main() {
 
 		// find extreme values from slice of position vectors
 		extPoints := tools.RemoveDuplicates(extrema.FindValues(points[0], points))
-		fmt.Println(extPoints)
+
+		// create ATP
+		atPoly := g.NewPoly(
+			g.MapNodeFunToVecs(g.NewNode, extPoints),
+		)
+		fmt.Println(atPoly)
 
 		// find geometric centre of ATP
 
 		// Modified Gift-Wrap algorithm where only points outside the AKpoly are considered
+
 	}
 
 }
