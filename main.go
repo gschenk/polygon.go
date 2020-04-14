@@ -35,7 +35,7 @@ func main() {
 		}
 
 		// assign data from json to a slice of vectors
-		points := tools.PointsToVecs(record)
+		points := vector.PointsToVecs(record)
 
 		// Akl-Toussaint heuristics:
 		// Quickly find a polygon that inscribes the convex hull polygon
