@@ -2,14 +2,6 @@ package vector
 
 import "testing"
 
-// test vectors
-var zero = Vec{0, 0}
-var unitX = Vec{1, 0}
-var unitY = Vec{0, 1}
-var vecA = Vec{2, 1}
-var vecB = Vec{1, 2}
-var vecC = Vec{-3.4, 2.5}
-
 func TestFromStruct(t *testing.T) {
 	testPoint := PointXY{X: 1.01e3, Y: 0.02}
 	result := FromStruct(testPoint)
@@ -30,10 +22,10 @@ func TestSum(t *testing.T) {
 		b Vec
 		r Vec
 	}{
-		{vecA, vecA, Vec{4, 2}},
-		{vecA, vecB, Vec{3, 3}},
-		{vecB, vecA, Vec{3, 3}},
-		{vecA, vecC, Vec{-1.4, 3.5}},
+		{testA, testA, Vec{4, 2}},
+		{testA, testB, Vec{3, 3}},
+		{testB, testA, Vec{3, 3}},
+		{testA, testC, Vec{-1.4, 3.5}},
 	}
 
 	for _, table := range tables {
@@ -54,11 +46,11 @@ func TestFromAtoB(t *testing.T) {
 		b Vec
 		r Vec
 	}{
-		{zero, vecA, vecA},
-		{vecA, vecA, zero},
-		{vecA, vecB, Vec{-1, 1}},
-		{vecB, vecA, Vec{1, -1}},
-		{vecA, vecC, Vec{-5.4, 1.5}},
+		{Zero, testA, testA},
+		{testA, testA, Zero},
+		{testA, testB, Vec{-1, 1}},
+		{testB, testA, Vec{1, -1}},
+		{testA, testC, Vec{-5.4, 1.5}},
 	}
 
 	for _, table := range tables {
@@ -79,11 +71,11 @@ func TestDot(t *testing.T) {
 		b Vec
 		x float64
 	}{
-		{unitX, unitY, 0}, // orthogonal vectors zero
-		{vecA, vecA, 5},
-		{vecA, vecB, 4},
-		{vecB, vecA, 4},
-		{vecA, vecC, -4.3},
+		{UnitX, UnitY, 0}, // orthogonal vectors Zero
+		{testA, testA, 5},
+		{testA, testB, 4},
+		{testB, testA, 4},
+		{testA, testC, -4.3},
 	}
 
 	for _, table := range tables {
@@ -104,12 +96,12 @@ func TestDet(t *testing.T) {
 		b Vec
 		x float64
 	}{
-		{unitX, unitY, 1},     //orthogonal vectors: product of norms
-		{vecA, vecA, 0},       // identical vectors: zero
-		{unitX, Vec{2, 0}, 0}, // collinear vectors: zero
-		{vecA, vecB, 3},
-		{vecB, vecA, -3},
-		{vecA, vecC, 8.4},
+		{UnitX, UnitY, 1},     //orthogonal vectors: product of norms
+		{testA, testA, 0},     // identical vectors: zero
+		{UnitX, Vec{2, 0}, 0}, // collinear vectors: zero
+		{testA, testB, 3},
+		{testB, testA, -3},
+		{testA, testC, 8.4},
 	}
 
 	for _, table := range tables {
@@ -129,12 +121,12 @@ func TestNormSquare(t *testing.T) {
 		a Vec
 		x float64
 	}{
-		{zero, 0},
-		{unitX, 1},
-		{unitY, 1},
-		{vecA, 5},
-		{vecB, 5},
-		{vecC, 17.81},
+		{Zero, 0},
+		{UnitX, 1},
+		{UnitY, 1},
+		{testA, 5},
+		{testB, 5},
+		{testC, 17.81},
 	}
 
 	for _, table := range tables {
