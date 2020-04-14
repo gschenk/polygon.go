@@ -12,3 +12,12 @@ func MapNodeFunToVecs(f func(vector.Vec) Node, xs []vector.Vec) []Node {
 	}
 	return ys
 }
+
+// mapNodeFunToVecs a function that returns a Node to a slice of vector.Vec
+func mapVecFunToNodes(f func(Node) vector.Vec, xs []Node) []vector.Vec {
+	ys := make([]vector.Vec, len(xs))
+	for i, x := range xs {
+		ys[i] = f(x)
+	}
+	return ys
+}

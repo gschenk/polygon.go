@@ -1,7 +1,10 @@
 // Package vector provides a type and functions for simple vector calculations
 package vector
 
-import "math"
+import (
+	"math"
+	"polyGo/tools"
+)
 
 // PointXY type for a point in a Carthesian plane
 type PointXY struct {
@@ -68,4 +71,11 @@ func NormSquare(a Vec) float64 {
 // Norm :: Vec -> float64
 func Norm(a Vec) float64 {
 	return math.Sqrt(NormSquare(a))
+}
+
+// EqualVecs compares two vectors, ie difference of components less than epsilon
+// EqualVecs :: Vec -> Vec -> bool
+func EqualVecs(a, b Vec) bool {
+	return tools.FloatsEqual(a[0], b[0]) &&
+		tools.FloatsEqual(a[1], b[1])
 }

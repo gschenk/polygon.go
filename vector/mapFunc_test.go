@@ -33,3 +33,28 @@ func TestMapVecFunToVecs(t *testing.T) {
 		)
 	}
 }
+
+func TestFoldrVecs(t *testing.T) {
+
+	f := Sum
+	xs := testVs
+	x0 := Zero
+	expected := Vec{0.6, 6.5}
+	result := FoldrVecs(f, xs, x0)
+
+	if !EqualVecs(expected, result) {
+		t.Errorf(
+			"Test func not folded correctly with Sum; expected %v, received %v",
+			expected,
+			result,
+		)
+	}
+}
+
+//(f func(Vec, Vec) Vec, xs []Vec, x0 Vec) Vec {
+//	y := x0
+//	for _, x := range xs {
+//		y = f(y, x)
+//	}
+//	return y
+//}

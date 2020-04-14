@@ -26,6 +26,20 @@ func MapVecFunToVecs(f func(Vec) Vec, xs []Vec) []Vec {
 	return ys
 }
 
+// FoldrVecs folds a function that takes and returns a vector
+// to a slice of vectors.
+// f accepts two arguments and returns one, all vectors
+// xs are a slice of vectors
+// x0 is the neutral element for the operation in f
+// FoldrVecs (Vec -> Vec -> Vec) -> [Vec] -> Vec -> Vec
+func FoldrVecs(f func(Vec, Vec) Vec, xs []Vec, x0 Vec) Vec {
+	y := x0
+	for _, x := range xs {
+		y = f(y, x)
+	}
+	return y
+}
+
 // PointsToVecs converts a slice of PointXY to a slice of Vec
 func PointsToVecs(xs []PointXY) []Vec {
 	ys := make([]Vec, len(xs))
