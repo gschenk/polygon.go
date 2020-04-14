@@ -50,7 +50,7 @@ func main() {
 		atPoly := g.NewPoly(
 			g.MapNodeFunToVecs(g.NewNode, extPoints),
 		)
-		fmt.Println(atPoly.Centre())
+		fmt.Println(atPoly.Centre)
 
 		// find geometric centre of ATP
 

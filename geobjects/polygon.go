@@ -7,10 +7,10 @@ import (
 
 // Polygon is a struct that collects nodes, edges, and centre of a polygon
 type Polygon struct {
-	id       int64
-	nodes    []Node
-	centre   vector.Vec
-	complete bool
+	Id       int64
+	Nodes    []Node
+	Centre   vector.Vec
+	Complete bool
 }
 
 // findCentre returns the geometric centre of a set of nodes
@@ -33,14 +33,9 @@ func findCentre(ns []Node) vector.Vec {
 // NewPoly forms a polygon struct from a unique set of Nodes
 func NewPoly(ns []Node) Polygon {
 	return Polygon{
-		id:       id(),
-		nodes:    ns,
-		centre:   findCentre(ns),
-		complete: false,
+		Id:       id(),
+		Nodes:    ns,
+		Centre:   findCentre(ns),
+		Complete: false,
 	} //stub
-}
-
-// Centre returns the centre
-func (m *Polygon) Centre() vector.Vec {
-	return m.centre
 }
