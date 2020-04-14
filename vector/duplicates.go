@@ -1,18 +1,13 @@
-// Package tools provides useful functions for PolyGo
-package tools
-
-import (
-	"polyGo/vector"
-)
+package vector
 
 // find duplicate vectors in slice and return slice of unique values
 // based on Gist by arehmandev
 // https://gist.github.com/arehmandev/4790544bf08f9965596eb0d75f9f270b
 
-func RemoveDuplicates(elements []vector.Vec) []vector.Vec {
+func RemoveDuplicates(elements []Vec) []Vec {
 	// Use map to record duplicates as we find them.
-	encountered := map[vector.Vec]bool{}
-	result := []vector.Vec{}
+	encountered := map[Vec]bool{}
+	result := []Vec{}
 
 	for v := range elements {
 		if encountered[elements[v]] == true {

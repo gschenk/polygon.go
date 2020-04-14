@@ -9,7 +9,6 @@ import (
 
 	"polyGo/extrema"
 	g "polyGo/geobjects"
-	"polyGo/tools"
 	"polyGo/vector"
 )
 
@@ -45,7 +44,7 @@ func main() {
 		// Akl-Toussaint polygon (ATP)
 
 		// find extreme values from slice of position vectors
-		extPoints := tools.RemoveDuplicates(extrema.FindValues(points[0], points))
+		extPoints := vector.RemoveDuplicates(extrema.FindValues(points[0], points))
 
 		// create ATP
 		atPoly := g.NewPoly(
