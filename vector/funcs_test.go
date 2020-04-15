@@ -130,7 +130,7 @@ func TestNormSquare(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		result := NormSquare(table.a)
+		result := normSquare(table.a)
 		if result != table.x {
 			t.Errorf(
 				"Norm square calculated wrongly; expected %f, received %f",

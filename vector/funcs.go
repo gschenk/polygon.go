@@ -46,16 +46,16 @@ func Det(a, b Vec) float64 {
 	return a[0]*b[1] - a[1]*b[0]
 }
 
-// NormSquare returns the squared norm of a vector (dot product with itself)
-// NormSquare :: Vec -> float64
-func NormSquare(a Vec) float64 {
+// normSquare returns the squared norm of a vector (dot product with itself)
+// normSquare :: Vec -> float64
+func normSquare(a Vec) float64 {
 	return math.Pow(a[0], 2) + math.Pow(a[1], 2)
 }
 
-// Norm returns the norm of a vector
-// Norm :: Vec -> float64
-func Norm(a Vec) float64 {
-	return math.Sqrt(NormSquare(a))
+// norm returns the norm of a vector
+// norm :: Vec -> float64
+func norm(a Vec) float64 {
+	return math.Sqrt(normSquare(a))
 }
 
 // EqualVecs compares two vectors, ie difference of components less than epsilon
