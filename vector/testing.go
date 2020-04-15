@@ -8,4 +8,4 @@ var testB = Vec{1, 2}
 var testC = Vec{-3.4, 2.5}
 
 // a slice of test vectors
-var testVs = []Vec{Zero, UnitX, UnitY, testA, testB, testC}
+var testVs = Vecs{Zero, UnitX, UnitY, testA, testB, testC}
