@@ -12,14 +12,15 @@ type Edge struct {
 	id         int64
 	pos        vector.Vec // position of base node
 	evec       vector.Vec // edge vector, base to head
+	Centre     vector.Vec
 	det        float64
 	sign       bool // true for a negative det
-	base       int64
-	head       int64
-	next       vector.Vec // position of next outside node, defaults to head
+	Base       Node
+	Head       Node
+	Next       vector.Vec // position of Next Outside node, defaults to head
 	nextAngle  float64
-	nextExists bool
-	outside    vector.Vecs
+	HasOutside bool
+	Outside    vector.Vecs
 }
 
 // Edges provide a list of edges
@@ -37,20 +38,22 @@ func NewEdge(a, b Node, cent vector.Vec) Edge {
 		id:         id(),
 		pos:        a.v,
 		evec:       evec,
+		Centre:     cent,
 		det:        det,
 		sign:       math.Signbit(det),
-		base:       a.id, // id of node at base
-		head:       b.id, // id of node at head
-		next:       b.v,  // defaults to position of head, edge
+		Base:       a,   // node at base
+		Head:       b,   // node at head
+		Next:       b.v, // defaults to position of head, edge
 		nextAngle:  0,
-		nextExists: false, // set this to true when there is a point outside this edge
-		outside:    vector.Vecs{},
+		HasOutside: false, // set this to true when there is a point Outside this edge
+		Outside:    vector.Vecs{},
 	}
 }
 
 // Warning: Method modifies Edge struct!
-// findOutsidePoints
-func (e *Edge) findOutsidePoints(p vector.Vec) (vector.Vec, bool) {
+// processPoint determines if a point is outside or inside of the edge
+// for outside points it also checks if it is the next node
+func (e *Edge) processPoint(p vector.Vec) (vector.Vec, bool) {
 
 	// vector vp from edge (base) to point p
 	vp := vector.FromAtoB(e.pos, p)
@@ -58,31 +61,43 @@ func (e *Edge) findOutsidePoints(p vector.Vec) (vector.Vec, bool) {
 	// find determinant of edge vector and vp
 	det := vector.Det(e.evec, vp)
 
-	// test if point is on edge, inside, or outside
+	// test if point is on edge, inside, or Outside
 	if tools.FloatIsZero(det) {
 		// colinear vector, ignore point
 		// (With Akl-Toussaint heuristic it has to be on the edge)
 		return vector.Zero, false
 	} else if e.sign == (det < 0) {
-		// inside point, return it, for next edge to check
+		// inside point, return it, for Next edge to check
 		return p, true
 	}
-	// outside, don't return it, store it with edge
-	e.outside = append(e.outside, p)
+	// Outside, don't return it, store it with edge
+	e.Outside = append(e.Outside, p)
 
-	// and check if it is next node
+	// and check if it is Next node
 
 	angle := math.Pow(det, 2) / vp.Norm2()
 	// this is not _really_ the angle
 	// when restricting to [0 .. pi] it is bijective mapping to it
 
 	if angle > e.nextAngle {
-		e.next = p
+		e.Next = p
 		e.nextAngle = angle
-		e.nextExists = true
+		e.HasOutside = true
 	}
 
 	return vector.Zero, false
+}
+
+// FindOutsidePoints runs the outside point search for a slice of points
+func (e *Edge) FindOutsidePoints(ps vector.Vecs) vector.Vecs {
+	insidePs := vector.Vecs{}
+	for _, p := range ps {
+		insideP, isInside := e.processPoint(p)
+		if isInside {
+			insidePs = append(insidePs, insideP)
+		}
+	}
+	return insidePs // next search only through points centre-wards of the present edge
 }
 
 // Edges Methods
@@ -106,7 +121,7 @@ func (es Edges) signs() []bool {
 // Points method returns a slice of vectors for each node,
 func (es Edges) Points() []vector.Vecs {
 	return mapVecsFunToEdges(
-		func(e Edge) vector.Vecs { return e.outside },
+		func(e Edge) vector.Vecs { return e.Outside },
 		es,
 	)
 }

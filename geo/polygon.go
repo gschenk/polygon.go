@@ -47,7 +47,7 @@ func linkEdges(as Nodes, cent vector.Vec) Edges {
 func completeness(es Edges) bool {
 
 	// the first and last node have a common node
-	isClosed := es[0].base == es[len(es)-1].head
+	isClosed := es[0].Base.id == es[len(es)-1].Head.id
 
 	// all edges are oriented in same direction of rotation
 	edgesOriented := es.signs()
@@ -83,17 +83,8 @@ func NewPoly(nodes Nodes) Polygon {
 
 // FindOutsidePoints runs the outside point search for each edge of the polygo
 func (poly *Polygon) FindOutsidePoints(ps vector.Vecs) {
-
 	for i, _ := range poly.Edges {
 		edge := &poly.Edges[i]
-
-		insidePs := vector.Vecs{}
-		for _, p := range ps {
-			insideP, isInside := edge.findOutsidePoints(p)
-			if isInside {
-				insidePs = append(insidePs, insideP)
-			}
-		}
-		ps = insidePs // next search only through points centre-wards of the present edge
+		ps = edge.FindOutsidePoints(ps)
 	}
 }
