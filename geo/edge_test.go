@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestFindOutsidePoints(t *testing.T) {
+func TestProcessPoint(t *testing.T) {
 	cent := vector.Zero
 	nodeA := NewNode(vector.Vec{1, 1})
 	nodeB := NewNode(vector.Vec{-1, 1})
@@ -41,9 +41,9 @@ func TestFindOutsidePoints(t *testing.T) {
 		edge := NewEdge(table.a, table.b, cent)
 
 		// test point against edge
-		edge.FindOutsidePoints(table.p)
+		edge.processPoint(table.p)
 
-		_, rFlag := edge.FindOutsidePoints(table.q)
+		_, rFlag := edge.processPoint(table.q)
 
 		if rFlag != table.expReturnFlag {
 			t.Errorf(

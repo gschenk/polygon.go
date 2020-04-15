@@ -51,8 +51,9 @@ func NewEdge(a, b Node, cent vector.Vec) Edge {
 }
 
 // Warning: Method modifies Edge struct!
-// FindOutsidePoints
-func (e *Edge) FindOutsidePoints(p vector.Vec) (vector.Vec, bool) {
+// processPoint determines if a point is outside or inside of the edge
+// for outside points it also checks if it is the next node
+func (e *Edge) processPoint(p vector.Vec) (vector.Vec, bool) {
 
 	// vector vp from edge (base) to point p
 	vp := vector.FromAtoB(e.pos, p)
@@ -85,6 +86,18 @@ func (e *Edge) FindOutsidePoints(p vector.Vec) (vector.Vec, bool) {
 	}
 
 	return vector.Zero, false
+}
+
+// FindOutsidePoints runs the outside point search for a slice of points
+func (e *Edge) FindOutsidePoints(ps vector.Vecs) vector.Vecs {
+	insidePs := vector.Vecs{}
+	for _, p := range ps {
+		insideP, isInside := e.processPoint(p)
+		if isInside {
+			insidePs = append(insidePs, insideP)
+		}
+	}
+	return insidePs // next search only through points centre-wards of the present edge
 }
 
 // Edges Methods

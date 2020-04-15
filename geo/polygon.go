@@ -83,17 +83,8 @@ func NewPoly(nodes Nodes) Polygon {
 
 // FindOutsidePoints runs the outside point search for each edge of the polygo
 func (poly *Polygon) FindOutsidePoints(ps vector.Vecs) {
-
 	for i, _ := range poly.Edges {
 		edge := &poly.Edges[i]
-
-		insidePs := vector.Vecs{}
-		for _, p := range ps {
-			insideP, isInside := edge.FindOutsidePoints(p)
-			if isInside {
-				insidePs = append(insidePs, insideP)
-			}
-		}
-		ps = insidePs // next search only through points centre-wards of the present edge
+		ps = edge.FindOutsidePoints(ps)
 	}
 }
