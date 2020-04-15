@@ -6,21 +6,6 @@ import (
 	"polyGo/tools"
 )
 
-// PointXY type for a point in a Carthesian plane
-type PointXY struct {
-	X float64
-	Y float64
-}
-
-// Vec type for a vector with two dimensions
-type Vec [2]float64
-
-// FromStruct returns the position vector of a coordinate in the Cartesian
-// plane. It takes type PointXY and returns Vec
-func FromStruct(r PointXY) Vec {
-	return Vec{r.X, r.Y}
-}
-
 // Sum returns the sum of two vectors
 func Sum(a, b Vec) Vec {
 	return Vec{

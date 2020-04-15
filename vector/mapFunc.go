@@ -40,11 +40,11 @@ func FoldrVecs(f func(Vec, Vec) Vec, xs []Vec, x0 Vec) Vec {
 	return y
 }
 
-// PointsToVecs converts a slice of PointXY to a slice of Vec
-func PointsToVecs(xs []PointXY) []Vec {
+// PointsToVecs converts a slice of Point to a slice of Vec
+func PointsToVecs(xs []Point) []Vec {
 	ys := make([]Vec, len(xs))
 	for i, x := range xs {
-		ys[i] = FromStruct(x)
+		ys[i] = x.vec()
 	}
 	return ys
 }

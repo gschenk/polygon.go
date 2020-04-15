@@ -2,14 +2,14 @@ package vector
 
 import "testing"
 
-func TestFromStruct(t *testing.T) {
-	testPoint := PointXY{X: 1.01e3, Y: 0.02}
-	result := FromStruct(testPoint)
+func TestPoint(t *testing.T) {
+	testPoint := Point{X: 1.01e3, Y: 0.02}
+	result := testPoint.vec()
 	expected := Vec{1010, 0.02}
 
 	if result != expected {
 		t.Errorf(
-			"PointXY incorrectly read as vector; expected %v, received %+v",
+			"Point incorrectly read as vector; expected %v, received %+v",
 			expected,
 			result,
 		)

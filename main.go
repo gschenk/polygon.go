@@ -20,7 +20,7 @@ func main() {
 
 	// Points are provided as a Json of the form:
 	// [{"x": 1e-3, "y":-2.235}, {"x": 42, "y":-13}]
-	var record []vector.PointXY
+	var record []vector.Point
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		text, err := reader.ReadString('\n')
