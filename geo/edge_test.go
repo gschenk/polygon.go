@@ -11,8 +11,8 @@ func TestFindOutsidePoints(t *testing.T) {
 	nodeB := NewNode(vector.Vec{-1, 1})
 	pointC := vector.Vec{0, 0.5}   // inside
 	pointD := vector.Vec{0, 1}     // on edge
-	pointE := vector.Vec{0, 1.5}   // outside
-	pointF := vector.Vec{0.5, 1.5} // outside
+	pointE := vector.Vec{0, 1.5}   // Outside
+	pointF := vector.Vec{0.5, 1.5} // Outside
 
 	tables := []struct {
 		a             Node
@@ -32,7 +32,7 @@ func TestFindOutsidePoints(t *testing.T) {
 		{nodeB, nodeA, pointD, pointC, true, false, 0, 0}, //reverse nodes
 		{nodeB, nodeA, pointC, pointD, false, false, 0, 0},
 		{nodeB, nodeA, pointD, pointD, false, false, 0, 0},
-		{nodeB, nodeA, pointE, pointF, false, true, 0.8, 2}, //other outside point found first
+		{nodeB, nodeA, pointE, pointF, false, true, 0.8, 2}, //other Outside point found first
 	}
 
 	for _, table := range tables {
@@ -41,9 +41,9 @@ func TestFindOutsidePoints(t *testing.T) {
 		edge := NewEdge(table.a, table.b, cent)
 
 		// test point against edge
-		edge.findOutsidePoints(table.p)
+		edge.FindOutsidePoints(table.p)
 
-		_, rFlag := edge.findOutsidePoints(table.q)
+		_, rFlag := edge.FindOutsidePoints(table.q)
 
 		if rFlag != table.expReturnFlag {
 			t.Errorf(
@@ -51,7 +51,7 @@ func TestFindOutsidePoints(t *testing.T) {
 				table.p,
 			)
 		}
-		if edge.nextExists != table.expNextExists {
+		if edge.HasOutside != table.expNextExists {
 			t.Errorf(
 				"Next node %v not recognised",
 				table.p,
@@ -64,11 +64,11 @@ func TestFindOutsidePoints(t *testing.T) {
 				table.expNextAngle,
 			)
 		}
-		if len(edge.outside) != table.expLen {
+		if len(edge.Outside) != table.expLen {
 			t.Errorf(
-				"Length of outside points slice not correct, expected %d, found %d",
+				"Length of Outside points slice not correct, expected %d, found %d",
 				table.expLen,
-				len(edge.outside),
+				len(edge.Outside),
 			)
 		}
 	}
