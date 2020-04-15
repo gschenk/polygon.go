@@ -29,3 +29,11 @@ func (ns Nodes) vecs() vector.Vecs {
 		ns,
 	)
 }
+
+// vecs returns a slice of Node's ids
+func (ns Nodes) Ids() []int64 {
+	return mapIntFunToNodes(
+		func(n Node) int64 { return n.id },
+		ns,
+	)
+}

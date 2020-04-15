@@ -47,7 +47,7 @@ func linkEdges(as Nodes, cent vector.Vec) Edges {
 func completeness(es Edges) bool {
 
 	// the first and last node have a common node
-	isClosed := es[0].base.id == es[len(es)-1].Head.id
+	isClosed := es[0].Base.id == es[len(es)-1].Head.id
 
 	// all edges are oriented in same direction of rotation
 	edgesOriented := es.signs()

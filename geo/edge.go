@@ -15,7 +15,7 @@ type Edge struct {
 	Centre     vector.Vec
 	det        float64
 	sign       bool // true for a negative det
-	base       Node
+	Base       Node
 	Head       Node
 	Next       vector.Vec // position of Next Outside node, defaults to head
 	nextAngle  float64
@@ -41,7 +41,7 @@ func NewEdge(a, b Node, cent vector.Vec) Edge {
 		Centre:     cent,
 		det:        det,
 		sign:       math.Signbit(det),
-		base:       a,   // node at base
+		Base:       a,   // node at base
 		Head:       b,   // node at head
 		Next:       b.v, // defaults to position of head, edge
 		nextAngle:  0,

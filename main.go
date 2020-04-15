@@ -12,6 +12,8 @@ import (
 	"polyGo/vector"
 )
 
+const maxrecursion = 1000
+
 func main() {
 
 	// Data input receives a collection of points in the
@@ -60,6 +62,11 @@ func main() {
 
 		// find points outside of each edge of the ATP and store them with the edge
 		atPoly.FindOutsidePoints(points)
+
+		// run a recursive chain search nor CHP nodes outside each ATP edge
+		chpNodes := chainSearch(atPoly.Edges)
+		fmt.Println("ATP", atPoly.Nodes.Ids())
+		fmt.Println("CHP", chpNodes.Ids())
 
 	}
 }
