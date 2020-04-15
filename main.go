@@ -50,9 +50,10 @@ func main() {
 		atPoly := g.NewPoly(
 			g.MapNodeFunToVecs(g.NewNode, extPoints),
 		)
-		fmt.Println(atPoly.Centre)
 
 		// find geometric centre of ATP
+		fmt.Println(atPoly.Centre)
+		fmt.Println(atPoly.Complete)
 
 		// Modified Gift-Wrap algorithm where only points outside the AKpoly are considered
 
