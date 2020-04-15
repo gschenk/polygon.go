@@ -58,6 +58,8 @@ func main() {
 
 		// Modified Gift-Wrap algorithm where only points outside the AKpoly are considered
 
-	}
+		// find points outside of each edge of the ATP and store them with the edge
+		atPoly.FindOutsidePoints(points)
 
+	}
 }
