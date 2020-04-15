@@ -1,5 +1,5 @@
-// Package geobjects provides geometric objects, viz. nodes, edges, and polygon
-package geobjects
+// Package geo provides geometric objects, viz. nodes, edges, and polygon
+package geo
 
 import "polyGo/vector"
 

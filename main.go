@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"polyGo/extrema"
-	g "polyGo/geobjects"
+	"polyGo/geo"
 	"polyGo/vector"
 )
 
@@ -47,8 +47,8 @@ func main() {
 		extPoints := vector.RemoveDuplicates(extrema.FindValues(points[0], points))
 
 		// create ATP
-		atPoly := g.NewPoly(
-			g.MapNodeFunToVecs(g.NewNode, extPoints),
+		atPoly := geo.NewPoly(
+			geo.MapNodeFunToVecs(geo.NewNode, extPoints),
 		)
 
 		// find geometric centre of ATP

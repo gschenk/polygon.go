@@ -1,4 +1,4 @@
-package geobjects
+package geo
 
 import "polyGo/vector"
 
