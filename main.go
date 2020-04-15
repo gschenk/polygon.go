@@ -20,7 +20,7 @@ func main() {
 
 	// Points are provided as a Json of the form:
 	// [{"x": 1e-3, "y":-2.235}, {"x": 42, "y":-13}]
-	var record []vector.Point
+	var record vector.Points
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		text, err := reader.ReadString('\n')
@@ -35,7 +35,7 @@ func main() {
 		}
 
 		// assign data from json to a slice of vectors
-		points := vector.PointsToVecs(record)
+		points := record.Vecs()
 
 		// Akl-Toussaint heuristics:
 		// Quickly find a polygon that inscribes the convex hull polygon

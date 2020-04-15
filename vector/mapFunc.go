@@ -40,11 +40,11 @@ func foldrVecs(f func(Vec, Vec) Vec, xs Vecs, x0 Vec) Vec {
 	return y
 }
 
-// PointsToVecs converts a slice of Point to a slice of Vec
-func PointsToVecs(xs []Point) Vecs {
+// mapVecFunToPoints maps a funct (Point -> Vec) to a slice of points
+func mapVecFunToPoints(f func(p Point) Vec, xs Points) Vecs {
 	ys := make(Vecs, len(xs))
 	for i, x := range xs {
-		ys[i] = x.vec()
+		ys[i] = f(x)
 	}
 	return ys
 }
