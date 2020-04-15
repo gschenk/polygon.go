@@ -1,3 +1,4 @@
+// Package vector provides a type and functions for simple vector calculations
 package vector
 
 // Vec type for a vector with two dimensions
