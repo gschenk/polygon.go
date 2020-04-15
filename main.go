@@ -44,11 +44,13 @@ func main() {
 		// Akl-Toussaint polygon (ATP)
 
 		// find extreme values from slice of position vectors
-		extPoints := vector.RemoveDuplicates(extrema.FindValues(points[0], points))
+		extPoints := vector.RemoveDuplicates(
+			extrema.FindValues(points[0], points),
+		)
 
 		// create ATP
 		atPoly := geo.NewPoly(
-			geo.MapNodeFunToVecs(geo.NewNode, extPoints),
+			geo.NewNodes(extPoints),
 		)
 
 		// find geometric centre of ATP

@@ -10,7 +10,7 @@ import (
 // Polygon is a struct that collects nodes, edges, and centre of a polygon
 type Polygon struct {
 	id         int64
-	Nodes      []Node
+	Nodes      Nodes
 	Edges      Edges
 	Centre     vector.Vec
 	isComplete bool
@@ -18,16 +18,14 @@ type Polygon struct {
 }
 
 // findCentre returns the geometric centre of a set of nodes
-func findCentre(ns []Node) vector.Vec {
-
-	// get position vectors from nodes
-	vs := mapVecFunToNodes(
-		func(n Node) vector.Vec { return n.v },
-		ns,
-	)
+func findCentre(ns Nodes) vector.Vec {
 
 	// sum of all vectors
-	vSum := vector.FoldrVecs(vector.Sum, vs, vector.Zero)
+	vSum := vector.FoldrVecs(
+		vector.Sum,
+		ns.vecs(), // nodes' position vectors
+		vector.Zero,
+	)
 
 	// normalise
 	s := 1 / float64(len(ns))
@@ -35,7 +33,7 @@ func findCentre(ns []Node) vector.Vec {
 }
 
 // linkEdges returns edges for a set of nodes
-func linkEdges(as []Node, cent vector.Vec) Edges {
+func linkEdges(as Nodes, cent vector.Vec) Edges {
 
 	// reordered as, first element last
 	bs := append(as[1:], as[0])
@@ -62,7 +60,7 @@ func completeness(es Edges) bool {
 }
 
 // NewPoly forms a polygon struct from a unique set of Nodes
-func NewPoly(nodes []Node) Polygon {
+func NewPoly(nodes Nodes) Polygon {
 
 	cent := findCentre(nodes)
 	edges := linkEdges(nodes, cent)
