@@ -52,8 +52,7 @@ func main() {
 		)
 
 		// find geometric centre of ATP
-		fmt.Println(atPoly.Centre)
-		fmt.Println(atPoly.Complete)
+		fmt.Println("Akl-Toussaint polygon area", atPoly.Area)
 
 		// Modified Gift-Wrap algorithm where only points outside the AKpoly are considered
 
