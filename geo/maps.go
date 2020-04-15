@@ -30,3 +30,12 @@ func mapFloatFunToEdges(f func(Edge) float64, xs []Edge) []float64 {
 	}
 	return ys
 }
+
+// mapBoolFunToEdges a function that returns a Node to a slice of vector.Vec
+func mapBoolFunToEdges(f func(Edge) bool, xs []Edge) []bool {
+	ys := make([]bool, len(xs))
+	for i, x := range xs {
+		ys[i] = f(x)
+	}
+	return ys
+}

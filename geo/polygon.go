@@ -50,10 +50,7 @@ func completeness(es Edges) bool {
 	isClosed := es[0].tail == es[len(es)-1].head
 
 	// all edges are oriented in same direction of rotation
-	edgesOriented := tools.MapBoolFunToFloats(
-		math.Signbit,
-		es.dets(),
-	)
+	edgesOriented := es.signs()
 	isOriented := tools.EachTrue(edgesOriented) || tools.EachFalse(edgesOriented)
 	return isClosed && isOriented
 }
