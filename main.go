@@ -54,9 +54,7 @@ func main() {
 		atPoly := geo.NewPoly(
 			geo.NewNodes(extPoints),
 		)
-
-		// find geometric centre of ATP
-		fmt.Println("Akl-Toussaint polygon area", atPoly.Area)
+		//fmt.Println("Akl-Toussaint polygon area", atPoly.Area)
 
 		// Modified Gift-Wrap algorithm where only points outside the AKpoly are considered
 
@@ -65,8 +63,14 @@ func main() {
 
 		// run a recursive chain search nor CHP nodes outside each ATP edge
 		chpNodes := chainSearch(atPoly.Edges)
-		fmt.Println("ATP", atPoly.Nodes.Ids())
-		fmt.Println("CHP", chpNodes.Ids())
 
+		// construct CHP
+		chPoly := geo.NewPoly(
+			chpNodes,
+		)
+		//fmt.Println("Complex hull polygon area", chPoly.Area)
+
+		// output CHP area
+		fmt.Println(chPoly.Area)
 	}
 }
