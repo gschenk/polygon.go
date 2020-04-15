@@ -18,12 +18,12 @@ func NewNode(a vector.Vec) Node {
 }
 
 // NewNodes constructs a slice of Node from a slice of Vec
-func NewNodes(vs []vector.Vec) Nodes {
+func NewNodes(vs vector.Vecs) Nodes {
 	return mapNodeFunToVecs(NewNode, vs)
 }
 
 // vecs returns a slice of Node's position vectors
-func (ns Nodes) vecs() []vector.Vec {
+func (ns Nodes) vecs() vector.Vecs {
 	return mapVecFunToNodes(
 		func(n Node) vector.Vec { return n.v },
 		ns,

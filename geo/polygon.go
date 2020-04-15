@@ -21,9 +21,8 @@ type Polygon struct {
 func findCentre(ns Nodes) vector.Vec {
 
 	// sum of all vectors
-	vSum := vector.FoldrVecs(
+	vSum := ns.vecs().Foldr(
 		vector.Sum,
-		ns.vecs(), // nodes' position vectors
 		vector.Zero,
 	)
 

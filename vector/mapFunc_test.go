@@ -40,7 +40,7 @@ func TestFoldrVecs(t *testing.T) {
 	xs := testVs
 	x0 := Zero
 	expected := Vec{0.6, 6.5}
-	result := FoldrVecs(f, xs, x0)
+	result := foldrVecs(f, xs, x0)
 
 	if !EqualVecs(expected, result) {
 		t.Errorf(
