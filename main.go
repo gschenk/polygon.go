@@ -45,6 +45,12 @@ func main() {
 			points = points.Undup()
 		}
 
+		// take care of special cases
+		if len(points) < 3 {
+			fmt.Println(0) //area 0
+			continue
+		}
+
 		// Akl-Toussaint heuristics:
 		// Quickly find a polygon that inscribes the convex hull polygon
 		// by finding points with extreme coordinates along cardinal and diagonal
@@ -53,6 +59,13 @@ func main() {
 
 		// find extreme values from slice of position vectors, dump duplicates
 		extPoints := extrema.FindValues(points[0], points).Undup()
+
+		// take care of degenerate cases
+		if len(extPoints) < 3 {
+			// TODO find extremes for very slim polygon shapes
+			fmt.Println(0) //area 0
+			continue
+		}
 
 		// create ATP
 		atPoly := geo.NewPoly(
