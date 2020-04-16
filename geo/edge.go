@@ -104,24 +104,18 @@ func (e *Edge) FindOutsidePoints(ps vector.Vecs) vector.Vecs {
 
 // dets method returns a slice of det values
 func (es Edges) dets() []float64 {
-	return mapFloatFunToEdges(
-		func(e Edge) float64 { return e.det },
-		es,
-	)
+	ys := make([]float64, len(es))
+	for i, e := range es {
+		ys[i] = e.det
+	}
+	return ys
 }
 
 // signs method returns a slice of bool values, `true` for negative det value
 func (es Edges) signs() []bool {
-	return mapBoolFunToEdges(
-		func(e Edge) bool { return e.sign },
-		es,
-	)
-}
-
-// Points method returns a slice of vectors for each node,
-func (es Edges) Points() []vector.Vecs {
-	return mapVecsFunToEdges(
-		func(e Edge) vector.Vecs { return e.Outside },
-		es,
-	)
+	bs := make([]bool, len(es))
+	for i, e := range es {
+		bs[i] = e.sign
+	}
+	return bs
 }

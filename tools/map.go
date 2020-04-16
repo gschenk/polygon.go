@@ -1,18 +1,6 @@
 // Package tools provides useful functions for PolyGo
 package tools
 
-// MapBoolFunToFloats implements a specific case of list comprehension 'map'
-// it takes a function (float64 -> bool) and applies it to each
-// element of a slice. It's Hindley-Milner-Signature is:
-// MapBoolFunToFloats:: (float64 -> bool) -> [float64] -> [bool]
-func MapBoolFunToFloats(f func(float64) bool, xs []float64) []bool {
-	ys := make([]bool, len(xs))
-	for i, x := range xs {
-		ys[i] = f(x)
-	}
-	return ys
-}
-
 // FloatSum sums the values of a slice of float
 // FloatSum :: [float64] -> float64
 func FloatSum(xs []float64) float64 {
