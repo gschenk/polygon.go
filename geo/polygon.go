@@ -13,7 +13,7 @@ type Polygon struct {
 	Nodes      Nodes
 	Edges      Edges
 	Centre     vector.Vec
-	isComplete bool
+	IsComplete bool
 	Area       float64
 }
 

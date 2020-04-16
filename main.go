@@ -14,6 +14,8 @@ import (
 
 const maxrecursion = 1000
 const fewpoints = 2000
+const debugflag = true
+const debuglog = "./debug.log"
 
 func main() {
 
@@ -93,6 +95,11 @@ func main() {
 		//fmt.Println("Complex hull polygon area", chPoly.Area)
 
 		// output CHP area
-		fmt.Println(chPoly.Area)
+		if chPoly.IsComplete {
+			fmt.Println(chPoly.Area)
+		} else {
+			debugWrite("Complex hull poly not complete.", chPoly, text)
+		}
+
 	}
 }
