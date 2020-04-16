@@ -60,9 +60,14 @@ func main() {
 		// find extreme values from slice of position vectors, dump duplicates
 		extPoints := extrema.FindValues(points[0], points).Undup()
 
+		// extrema.FindValues does not find ATP for very slim shapes
+		// use (expensive )second strategy:
+		if len(extPoints) == 2 {
+			extPoints = extrema.SecondExtremes(points, extPoints[0], extPoints[1])
+		}
+
 		// take care of degenerate cases
 		if len(extPoints) < 3 {
-			// TODO find extremes for very slim polygon shapes
 			fmt.Println(0) //area 0
 			continue
 		}
