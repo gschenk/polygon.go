@@ -117,11 +117,3 @@ func (es Edges) signs() []bool {
 		es,
 	)
 }
-
-// Points method returns a slice of vectors for each node,
-func (es Edges) Points() []vector.Vecs {
-	return mapVecsFunToEdges(
-		func(e Edge) vector.Vecs { return e.Outside },
-		es,
-	)
-}
