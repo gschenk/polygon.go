@@ -16,8 +16,9 @@ func (p Point) vec() Vec {
 
 // Vecs returns a slice of the Points' position vectors
 func (ps Points) Vecs() Vecs {
-	return mapVecFunToPoints(
-		func(p Point) Vec { return p.vec() },
-		ps,
-	)
+	vs := make(Vecs, len(ps))
+	for i, p := range ps {
+		vs[i] = p.vec()
+	}
+	return vs
 }
