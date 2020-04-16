@@ -23,31 +23,26 @@ type compare func(v.Vec, v.Vec) bool
 // the x-axis increases to the right and the y-axis to the top.
 //
 // There is no ternary in Go!
-var fLeft = func(a, b v.Vec) bool { return a[0] < b[0] }
-var fBotLeft = func(a, b v.Vec) bool { return a[0]+a[1] < b[0]+b[1] }
-var fBot = func(a, b v.Vec) bool { return a[1] < b[1] }
-var fBotRight = func(a, b v.Vec) bool { return a[0]-a[1] > b[0]-b[1] }
-var fRight = func(a, b v.Vec) bool { return a[0] > b[0] }
-var fTopRight = func(a, b v.Vec) bool { return a[0]+a[1] > b[0]+b[1] }
-var fTop = func(a, b v.Vec) bool { return a[1] > b[1] }
-var fTopLeft = func(a, b v.Vec) bool { return a[0]-a[1] < b[0]-b[1] }
-
-// ordered array of these functions
-var fs = [8]compare{fLeft, fBotLeft, fBot, fBotRight, fRight, fTopRight, fTop, fTopLeft}
-
-// i cannot be bothered to write an array of functions to iterate over
-// may i rot in hell for copy and paste
+// ordered array of comparison functions
+var compFuncs = [8]compare{
+	//	Left, BottomLeft, Bottom, BottomRight, Right, TopRight, Top, TopLeft
+	func(a, b v.Vec) bool { return a[0] < b[0] },
+	func(a, b v.Vec) bool { return a[0]+a[1] < b[0]+b[1] },
+	func(a, b v.Vec) bool { return a[1] < b[1] },
+	func(a, b v.Vec) bool { return a[0]-a[1] > b[0]-b[1] },
+	func(a, b v.Vec) bool { return a[0] > b[0] },
+	func(a, b v.Vec) bool { return a[0]+a[1] > b[0]+b[1] },
+	func(a, b v.Vec) bool { return a[1] > b[1] },
+	func(a, b v.Vec) bool { return a[0]-a[1] < b[0]-b[1] },
+}
 
 // tests two vectors with a test function and returns
 // the first when true otherwise the second
-func decide(a v.Vec, b v.Vec, f compare) v.Vec {
-	var c v.Vec
+func decide(a, b v.Vec, f compare) v.Vec {
 	if f(a, b) {
-		c = a
-	} else {
-		c = b
+		return a
 	}
-	return c
+	return b
 }
 
 func makeInitAccu(a v.Vec) Accu {
@@ -59,9 +54,9 @@ func makeInitAccu(a v.Vec) Accu {
 func innerFindValues(point v.Vec, accu Accu) Accu {
 	var result Accu
 
-	// loop over all 8 accu values using functions stored in fs
+	// loop over all 8 accu values using functions stored in compFuncs
 	for i, old := range accu {
-		result[i] = decide(point, old, fs[i])
+		result[i] = decide(point, old, compFuncs[i])
 	}
 	return result
 }
