@@ -14,7 +14,7 @@ import (
 
 const maxrecursion = 1e5
 const fewpoints = 2000
-const debugflag = true
+const debugflag = false
 const debuglog = "./debug.log"
 
 func main() {
