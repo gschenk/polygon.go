@@ -61,12 +61,7 @@ func NewPoly(nodes Nodes) Polygon {
 	cent := findCentre(nodes)
 	edges := linkEdges(nodes, cent)
 	isComplete := completeness(edges)
-	var area float64
-	if isComplete {
-		area = tools.FloatSum(edges.dets()) / 2
-	} else {
-		area = math.NaN()
-	}
+	area := math.Abs(tools.FloatSum(edges.dets()) / 2)
 
 	return Polygon{
 		id(),

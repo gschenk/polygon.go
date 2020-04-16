@@ -95,11 +95,10 @@ func main() {
 		//fmt.Println("Complex hull polygon area", chPoly.Area)
 
 		// output CHP area
-		if chPoly.IsComplete {
-			fmt.Println(chPoly.Area)
-		} else {
+		if !chPoly.IsComplete {
 			debugWrite("Complex hull poly not complete.", chPoly, text)
 		}
+		fmt.Println(chPoly.Area)
 
 	}
 }
