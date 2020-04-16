@@ -22,7 +22,7 @@ func SecondExtremes(points v.Vecs, a, b v.Vec) v.Vecs {
 
 	for _, p := range points {
 		ap := v.FromAtoB(a, p)
-		det := v.Det(ab, ap)
+		det := v.SafeDet(ab, ap)
 
 		// ignore colinear points
 		if tools.FloatIsZero(det) {

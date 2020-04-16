@@ -24,6 +24,28 @@ func FromAtoB(a, b Vec) Vec {
 	}
 }
 
+// SafeFromAtoB is FromAtoB with checks for equal component values
+// returns second argument, false when both vectors are same
+// SafeFromAtoB :: Vec -> Vec -> Vec -> bool
+func SafeFromAtoB(a, b Vec) Vec {
+	xIsZero := tools.FloatsEqual(a[0], b[0])
+	yIsZero := tools.FloatsEqual(a[1], b[1])
+	if xIsZero && yIsZero {
+		return Zero
+	}
+	if xIsZero {
+		y := b[1] - a[1]
+		return Vec{0, y}
+	}
+	if yIsZero {
+		x := b[0] - a[0]
+		return Vec{x, 0}
+	}
+	x := b[0] - a[0]
+	y := b[1] - a[1]
+	return Vec{x, y}
+}
+
 // ScalarMult returns the product of a scalar with a vector
 // ScalarMult :: float64 -> Vec -> Vec
 func ScalarMult(x float64, a Vec) Vec {
@@ -41,9 +63,20 @@ func Dot(a, b Vec) float64 {
 
 // Det returns the determinant of a matrix formed by the elements
 // of two column vectors provied as Vec.
-// Dot :: Vec -> Vec -> float64
+// Det :: Vec -> Vec -> float64
 func Det(a, b Vec) float64 {
 	return a[0]*b[1] - a[1]*b[0]
+}
+
+// SafeDet is Det with a check when close to zero
+// Det :: Vec -> Vec -> float64
+func SafeDet(a, b Vec) float64 {
+	down := a[0] * b[1]
+	up := a[1] * b[0]
+	if tools.FloatsEqual(down, up) {
+		return 0
+	}
+	return down - up
 }
 
 // normSquare returns the squared norm of a vector (dot product with itself)

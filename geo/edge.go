@@ -33,7 +33,7 @@ type Edges []Edge
 func NewEdge(a, b Node, cent vector.Vec) Edge {
 	evec := vector.FromAtoB(a.v, b.v)
 	toCent := vector.FromAtoB(a.v, cent)
-	det := vector.Det(evec, toCent)
+	det := vector.SafeDet(evec, toCent)
 	return Edge{
 		id:         id(),
 		pos:        a.v,
