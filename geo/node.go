@@ -28,16 +28,9 @@ func NewNodes(vs vector.Vecs) Nodes {
 
 // vecs returns a slice of Node's position vectors
 func (ns Nodes) vecs() vector.Vecs {
-	return mapVecFunToNodes(
-		func(n Node) vector.Vec { return n.v },
-		ns,
-	)
-}
-
-// vecs returns a slice of Node's ids
-func (ns Nodes) Ids() []int64 {
-	return mapIntFunToNodes(
-		func(n Node) int64 { return n.id },
-		ns,
-	)
+	vs := make(vector.Vecs, len(ns))
+	for i, n := range ns {
+		vs[i] = n.v
+	}
+	return vs
 }
