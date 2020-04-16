@@ -10,7 +10,7 @@ import (
 func recChainSearch(nodes geo.Nodes, edge geo.Edge, depth uint) (geo.Nodes, uint) {
 
 	if depth >= maxrecursion {
-		return nodes, depth
+		panic("recursive chain search depth limit reached")
 	}
 
 	// when an edge has no outside points, we are done here

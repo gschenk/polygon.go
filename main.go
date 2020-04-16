@@ -12,7 +12,7 @@ import (
 	"polyGo/vector"
 )
 
-const maxrecursion = 1000
+const maxrecursion = 1e5
 const fewpoints = 2000
 const debugflag = true
 const debuglog = "./debug.log"
