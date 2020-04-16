@@ -13,6 +13,7 @@ import (
 )
 
 const maxrecursion = 1000
+const fewpoints = 2000
 
 func main() {
 
@@ -39,16 +40,19 @@ func main() {
 		// assign data from json to a slice of vectors
 		points := record.Vecs()
 
+		// filter duplicates for small collections of points
+		if len(points) < fewpoints {
+			points = points.Undup()
+		}
+
 		// Akl-Toussaint heuristics:
 		// Quickly find a polygon that inscribes the convex hull polygon
 		// by finding points with extreme coordinates along cardinal and diagonal
 		// Cartesian coordinates. Henceforth the polygon constructed such is named
 		// Akl-Toussaint polygon (ATP)
 
-		// find extreme values from slice of position vectors
-		extPoints := vector.RemoveDuplicates(
-			extrema.FindValues(points[0], points),
-		)
+		// find extreme values from slice of position vectors, dump duplicates
+		extPoints := extrema.FindValues(points[0], points).Undup()
 
 		// create ATP
 		atPoly := geo.NewPoly(

@@ -35,3 +35,6 @@ func (vs Vecs) Norm2s() []float64 {
 		vs,
 	)
 }
+
+// Undup returns Vecs without duplicates
+func (vs Vecs) Undup() Vecs { return RemoveDuplicates(vs) }

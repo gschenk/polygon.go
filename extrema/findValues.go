@@ -72,12 +72,12 @@ func innerFindValues(point v.Vec, accu Accu) Accu {
 // The function returns up to eight unique position vectors for
 // points with extreme coordinate values along cardinal and diagonal
 // axes. The resulting slice may contain duplicates.
-func FindValues(iniPoint v.Vec, points []v.Vec) []v.Vec {
+func FindValues(iniPoint v.Vec, points v.Vecs) v.Vecs {
 	accu := makeInitAccu(iniPoint)
 	for _, p := range points {
 		accu = innerFindValues(p, accu)
 	}
-	extremes := make([]v.Vec, len(accu))
+	extremes := make(v.Vecs, len(accu))
 	for i, a := range accu {
 		extremes[i] = a
 	}
