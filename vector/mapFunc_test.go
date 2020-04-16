@@ -20,20 +20,6 @@ func TestMapScalarFunToVecs(t *testing.T) {
 	}
 }
 
-func TestMapVecFunToVecs(t *testing.T) {
-
-	f := func(a Vec) Vec { return a }
-	expected := testVs
-	result := mapVecFunToVecs(f, testVs)
-	if !reflect.DeepEqual(result, expected) {
-		t.Errorf(
-			"Test func not mapped correctly to testVs; expected %v, received %v",
-			expected,
-			result,
-		)
-	}
-}
-
 func TestFoldrVecs(t *testing.T) {
 
 	f := Sum

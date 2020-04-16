@@ -16,17 +16,6 @@ func mapScalarFunToVecs(f func(Vec) float64, xs Vecs) []float64 {
 	return ys
 }
 
-// mapVecFunToVecs maps a function that takes and returns a vector
-// to a slice of vectors.
-// mapVecFunToVecs (Vec -> Vec) -> [Vec] -> [Vec]
-func mapVecFunToVecs(f func(Vec) Vec, xs Vecs) Vecs {
-	ys := make(Vecs, len(xs))
-	for i, x := range xs {
-		ys[i] = f(x)
-	}
-	return ys
-}
-
 // foldrVecs folds a function that takes and returns a vector
 // to a slice of vectors.
 // f accepts two arguments and returns one, all vectors
