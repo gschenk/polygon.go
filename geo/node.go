@@ -19,7 +19,11 @@ func NewNode(a vector.Vec) Node {
 
 // NewNodes constructs a slice of Node from a slice of Vec
 func NewNodes(vs vector.Vecs) Nodes {
-	return mapNodeFunToVecs(NewNode, vs)
+	ns := make([]Node, len(vs))
+	for i, v := range vs {
+		ns[i] = NewNode(v)
+	}
+	return ns
 }
 
 // vecs returns a slice of Node's position vectors
